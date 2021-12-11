@@ -4,6 +4,8 @@ from pyspark.sql.types import StructField, StructType, StringType, LongType, Int
 import init_context
 
 sc,sp = init_context.init_context()
+df = None
+df1 = None
 def create_schema():
     myManualSchema = StructType([
         StructField("sno", IntegerType(), True),
@@ -18,6 +20,15 @@ def add_col(df,col_name,data_type):
         df.withColumn(col_name,lit())
 
 def drop_col(col_name):
-    pass
+    if df:
+        if col_name in df.columns:
+
+            df1 = df.drop(col_name)
+            return df1
+        else:
+            return f"{col_name} is not in Data Frame"
+    else:
+        return f"data frame has no column to delete."
+
     # return df1
 

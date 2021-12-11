@@ -1,7 +1,9 @@
 import pandas as pd
 
-import data_man
+import create_df
 
 def write_data():
-    #pdf = df1.toPandas()
-    pdf.to_csv("Data/df1.csv")
+    if create_df.df1:
+        pdf = create_df.df1.toPandas()
+        pdf.to_csv("Data/df1.csv")
+        return True
